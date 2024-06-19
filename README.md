@@ -31,7 +31,7 @@ To access the project, simply click on the link: [Free Entertainment](https://ki
 
 ## Credits
 
--**IKKnight**: for helping with the api.
+-[**IKKnight**](https://github.com/IKKNIGHT): for helping with the api.
 
 ## Disclaimer
 
