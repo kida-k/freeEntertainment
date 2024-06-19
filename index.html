@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Video Embed Test</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <style>
+    /* Add any additional CSS styles here */
+  </style>
+</head>
+
+<body>
+
+  <div class="container-lg my-5">
+    <div id="player_test" class="row">
+      <div class="col-sm">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <h3 class="index_h3">Player Tester</h3>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-movies-tab" data-bs-toggle="pill" data-bs-target="#pills-movies" type="button" role="tab" aria-controls="pills-movies" aria-selected="true">Movies</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-series-tab" data-bs-toggle="pill" data-bs-target="#pills-series" type="button" role="tab" aria-controls="pills-series" aria-selected="false">Series</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-movies" role="tabpanel" aria-labelledby="pills-movies-tab">
+            <div class="input-group input-group-sm mb-3">
+              <input id="movie_id" type="text" class="form-control" placeholder="IMDb/TMDB ID">
+              <button id="load_movie" class="btn btn-outline-secondary" type="button">Load Movie</button>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-series" role="tabpanel" aria-labelledby="pills-series-tab">
+            <div class="input-group input-group-sm mb-3">
+              <input id="series_id" type="text" class="form-control" placeholder="IMDb/TMDB ID">
+              <input id="series_season" type="number" class="form-control" placeholder="Season">
+              <input id="series_episode" type="number" class="form-control" placeholder="Episode">
+              <button id="load_series" class="btn btn-outline-secondary" type="button">Load Episode</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="iframe_test" class="col-sm ratio ratio-16x9" style="height: 0px;">
+        <iframe id="video_iframe" allowfullscreen="" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const moviesTab = document.getElementById('pills-movies-tab');
+      const seriesTab = document.getElementById('pills-series-tab');
+      const moviesContent = document.getElementById('pills-movies');
+      const seriesContent = document.getElementById('pills-series');
+
+      moviesTab.addEventListener('click', function () {
+        moviesTab.classList.add('active');
+        seriesTab.classList.remove('active');
+        moviesContent.classList.add('show', 'active');
+        seriesContent.classList.remove('show', 'active');
+      });
+
+      seriesTab.addEventListener('click', function () {
+        seriesTab.classList.add('active');
+        moviesTab.classList.remove('active');
+        seriesContent.classList.add('show', 'active');
+        moviesContent.classList.remove('show', 'active');
+      });
+
+      const loadMovieButton = document.getElementById('load_movie');
+      const loadSeriesButton = document.getElementById('load_series');
+      const movieIdInput = document.getElementById('movie_id');
+      const seriesIdInput = document.getElementById('series_id');
+      const seriesSeasonInput = document.getElementById('series_season');
+      const seriesEpisodeInput = document.getElementById('series_episode');
+      const videoIframe = document.getElementById('video_iframe');
+
+      loadMovieButton.addEventListener('click', function () {
+        const movieId = movieIdInput.value.trim();
+        if (movieId) {
+          const src = `https://vidsrc.me/embed/tv?imdb=${movieId}`;
+          videoIframe.src = src;
+        }
+      });
+
+      loadSeriesButton.addEventListener('click', function () {
+        const seriesId = seriesIdInput.value.trim();
+        const season = seriesSeasonInput.value.trim();
+        const episode = seriesEpisodeInput.value.trim();
+        if (seriesId && season && episode) {
+          const src = `https://vidsrc.me/embed/tv?imdb=${seriesId}&season=${season}&episode=${episode}`;
+          videoIframe.src = src;
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
