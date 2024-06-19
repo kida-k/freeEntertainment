@@ -5,10 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Video Embed Test</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet" type="text/css" />
-  <style>
-    /* Add any additional CSS styles here */
-  </style>
 </head>
 
 <body>
@@ -16,14 +14,12 @@
   <div class="container-lg my-5">
     <div id="player_test" class="row">
       <div class="col-sm">
+        <h3 class="index_h3">Player Tester</h3>
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-          <li class="nav-item">
-            <h3 class="index_h3">Player Tester</h3>
-          </li>
-          <li class="nav-item" role="presentation">
+          <li class="nav-item" role="presentation" id="movies_tab">
             <button class="nav-link active" id="pills-movies-tab" data-bs-toggle="pill" data-bs-target="#pills-movies" type="button" role="tab" aria-controls="pills-movies" aria-selected="true">Movies</button>
           </li>
-          <li class="nav-item" role="presentation">
+          <li class="nav-item" role="presentation" id="series_tab">
             <button class="nav-link" id="pills-series-tab" data-bs-toggle="pill" data-bs-target="#pills-series" type="button" role="tab" aria-controls="pills-series" aria-selected="false">Series</button>
           </li>
         </ul>
@@ -44,33 +40,18 @@
           </div>
         </div>
       </div>
-      <div id="iframe_test" class="col-sm ratio ratio-16x9" style="height: 0px;">
+      <div id="iframe_test" class="col-sm ratio ratio-16x9" style="height: 0;">
         <iframe id="video_iframe" allowfullscreen="" frameborder="0"></iframe>
       </div>
     </div>
   </div>
 
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const moviesTab = document.getElementById('pills-movies-tab');
-      const seriesTab = document.getElementById('pills-series-tab');
-      const moviesContent = document.getElementById('pills-movies');
-      const seriesContent = document.getElementById('pills-series');
-
-      moviesTab.addEventListener('click', function () {
-        moviesTab.classList.add('active');
-        seriesTab.classList.remove('active');
-        moviesContent.classList.add('show', 'active');
-        seriesContent.classList.remove('show', 'active');
-      });
-
-      seriesTab.addEventListener('click', function () {
-        seriesTab.classList.add('active');
-        moviesTab.classList.remove('active');
-        seriesContent.classList.add('show', 'active');
-        moviesContent.classList.remove('show', 'active');
-      });
-
       const loadMovieButton = document.getElementById('load_movie');
       const loadSeriesButton = document.getElementById('load_series');
       const movieIdInput = document.getElementById('movie_id');
@@ -78,13 +59,20 @@
       const seriesSeasonInput = document.getElementById('series_season');
       const seriesEpisodeInput = document.getElementById('series_episode');
       const videoIframe = document.getElementById('video_iframe');
+      const iframeTest = document.getElementById('iframe_test');
+      const moviesTab = document.getElementById('movies_tab');
+      const seriesTab = document.getElementById('series_tab');
 
       loadMovieButton.addEventListener('click', function () {
         const movieId = movieIdInput.value.trim();
         if (movieId) {
-          const src = `https://vidsrc.me/embed/tv?imdb=${movieId}`;
+          const src = `https://vidsrc.me/embed/movie?imdb=${movieId}`;
           videoIframe.src = src;
+          iframeTest.style.height = '500px'; // Set a height to display the iframe
         }
+        // Update active state for tabs
+        moviesTab.classList.add('active');
+        seriesTab.classList.remove('active');
       });
 
       loadSeriesButton.addEventListener('click', function () {
@@ -94,7 +82,28 @@
         if (seriesId && season && episode) {
           const src = `https://vidsrc.me/embed/tv?imdb=${seriesId}&season=${season}&episode=${episode}`;
           videoIframe.src = src;
+          iframeTest.style.height = '500px'; // Set a height to display the iframe
         }
+        // Update active state for tabs
+        seriesTab.classList.add('active');
+        moviesTab.classList.remove('active');
+      });
+
+      // Toggle between Movies and Series inputs
+      moviesTab.addEventListener('click', function () {
+        document.getElementById('pills-movies').style.display = 'block';
+        document.getElementById('pills-series').style.display = 'none';
+        // Update active state for tabs
+        moviesTab.classList.add('active');
+        seriesTab.classList.remove('active');
+      });
+
+      seriesTab.addEventListener('click', function () {
+        document.getElementById('pills-series').style.display = 'block';
+        document.getElementById('pills-movies').style.display = 'none';
+        // Update active state for tabs
+        seriesTab.classList.add('active');
+        moviesTab.classList.remove('active');
       });
     });
   </script>
