@@ -30,7 +30,7 @@ body {
 }
 
 .nav-pills .nav-link.active {
-
+  background-color: #007BFF;
   color: #FFFFFF;
 }
 
