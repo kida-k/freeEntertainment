@@ -21,13 +21,17 @@ To access the project, simply click on the link: [Free Entertainment](https://ki
 4. Click **Load Movie** or **Load Episode** to start streaming.
 5. Enjoy your movie or series without interruptions!
 
-## Feedback and Support
+## How to Get IMDB id
 
-We welcome your feedback and suggestions to improve the platform. If you encounter any issues or have questions, please feel free to [contact us](mailto:your-email@example.com).
+1. go to [IMDB](https://www.imdb.com/)
+2. search for your disired show/movie
+3. get the link (example {https://www.imdb.com/title/tt8421350/?ref_=nv_sr_srsg_0_tt_8_nm_0_q_manif})
+4. then copy the tt part {example (tt8421350)}
+5. up that into the imdb id input field and you're done
 
-## Contributing
+## Credits
 
-If you are interested in contributing to the project or adding content, please refer to the [contributing guidelines](CONTRIBUTING.md).
+-**IKKnight**: for helping with the api.
 
 ## Disclaimer
 
